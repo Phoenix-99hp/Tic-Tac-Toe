@@ -86,6 +86,10 @@ const player1 = {
             player1.won = true;
             this.celebrate();
         }
+        else if (col1s.filter((mark) => mark !== "").concat((col2s.filter((mark) => mark !== "")), col3s.filter((mark) => mark !== "")).length === 9) {
+            console.log(col1s.filter((mark) => mark !== "").concat((col2s.filter((mark) => mark !== "")), col3s.filter((mark) => mark !== "")));
+            tie();
+        }
         else (player2.turn = true);
     },
     celebrate: function () {
@@ -104,6 +108,22 @@ const player1 = {
             })
         }, 2000);
     }
+}
+
+function tie() {
+    toast.classList.add("show");
+    toast.innerText = "Tie"
+    setTimeout(function clearBoard() {
+        startBtn.disabled = false;
+        player1.won = false;
+        player2.won = false;
+        player1.turn = false;
+        player2.turn = false;
+        toast.classList.remove("show");
+        cells.forEach(cell => {
+            cell.innerText = "";
+        })
+    }, 2000);
 }
 
 const player2 = {
@@ -161,6 +181,10 @@ const player2 = {
         else if (diag2s[0] === "O" && diag2s[1] === "O" && diag2s[2] === "O") {
             player2.won = true;
             this.celebrate();
+        }
+        else if (col1s.filter((mark) => mark !== "").concat((col2s.filter((mark) => mark !== "")), col3s.filter((mark) => mark !== "")).length === 9) {
+            console.log(col1s.filter((mark) => mark !== "").concat((col2s.filter((mark) => mark !== "")), col3s.filter((mark) => mark !== "")));
+            tie();
         }
         else (player1.turn = true);
     },
